@@ -15,11 +15,26 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    maven("https://jitpack.io")
 }
+
+val exposedVersion: String by project
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    // Kotlin Exposed
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+
+    // JDBC Driver for SQLite
+    implementation("org.xerial:sqlite-jdbc:3.50.1.0")
+
+    implementation("com.github.hamza-cskn.obliviate-invs:core:4.3.0")
+    implementation("com.github.hamza-cskn.obliviate-invs:advancedslot:4.3.0")
+    implementation("com.github.hamza-cskn.obliviate-invs:pagination:4.3.0")
 
     compileOnly("com.github.aoideveloper:SimpleEconomy:1.0-SNAPSHOT")
 }

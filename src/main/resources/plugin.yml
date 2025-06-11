@@ -4,3 +4,7 @@ main: com.github.aoideveloper.smartShop.SmartShop
 api-version: '1.21'
 authors: [ AoiDeveloper ]
 depend: [ SimpleEconomy ]
+commands:
+  shop:
+    description: ショップGUIを開きます。
+    usage: /shop
