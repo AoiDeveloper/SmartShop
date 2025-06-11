@@ -3,7 +3,7 @@
 ## 概要
 - Spigot 1.21.1での動作を想定しています。
 - /shopコマンドでGUIを開き、商品の出品・購入ができます。
-- SimpleEconomy(https://github.com/AoiDeveloper/SimpleEconomy)に依存しています。
+- SimpleEconomy( https://github.com/AoiDeveloper/SimpleEconomy )に依存しています。
 ## ビルド方法
 ルートで./gradlew jarとかするとjarが生成されます。
 ## 動作確認方法
