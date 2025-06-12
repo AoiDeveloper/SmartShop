@@ -46,6 +46,29 @@ tasks {
         // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("1.21")
     }
+
+    shadowJar {
+        relocate("mc.obliviate.inventory", "com.github.aoideveloper.smartShop.libs.obliviateinvs")
+
+        mergeServiceFiles()
+
+        archiveBaseName.set(rootProject.name)
+        archiveClassifier.set("")
+        archiveVersion.set(project.version.toString())
+    }
+
+    build {
+        dependsOn(shadowJar)
+    }
+
+    processResources {
+        val props = mapOf("version" to version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("plugin.yml") {
+            expand(props)
+        }
+    }
 }
 
 val targetJavaVersion = 21
