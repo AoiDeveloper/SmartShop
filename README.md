@@ -5,7 +5,8 @@
 - /shopコマンドでGUIを開き、商品の出品・購入ができます。
 - SimpleEconomy( https://github.com/AoiDeveloper/SimpleEconomy )に依存しています。
 ## ビルド方法
-ルートで./gradlew jarとかするとjarが生成されます。
+~~ルートで./gradlew jarとかするとjarが生成されます。~~
+./gradlew shadowJarを使用してください。そうしなければkotlin-std-libが含まれません。
 ## 動作確認方法
 Spigot 1.21.1で作ったサーバーのpluginsフォルダに入れて実行してください。  
 もちろんそのときにはSimpleEconomyも導入してください。
