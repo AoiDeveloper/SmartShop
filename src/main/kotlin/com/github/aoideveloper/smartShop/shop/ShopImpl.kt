@@ -31,13 +31,13 @@ object ShopImpl: Shop {
 
     override fun buy(itemId: Long, buyer: UUID): Boolean {
         return transaction {
-            val buyItem = ShopItems.selectAll().where{ (ShopItems.id eq itemId) and (ShopItems.sold eq false) }.singleOrNull() ?: return@transaction false
+            val buyItem = ShopItems.selectAll().where{ (ShopItems.id eq itemId) and (ShopItems.sold eq false) and (ShopItems.removed eq false) }.singleOrNull() ?: return@transaction false
             val seller = buyItem[ShopItems.seller]
 
             val player = SmartShop.plugin.server.getPlayer(buyer)
 
             if(seller == buyer) {
-                player?.sendMessage("${ChatColor.GOLD}自分が出品したアイテムは買えません。もし出品を取り下げたい場合にはショップメニューからどうぞ")
+                player?.sendMessage("${ChatColor.GOLD}自分が出品したアイテムは買えません。もし出品を取り下げたい場合には出品者メニューからどうぞ")
                 return@transaction false
             }
 
@@ -59,9 +59,17 @@ object ShopImpl: Shop {
 
     override fun items(): List<SellingItem> {
         return transaction {
-            ShopItems.selectAll().where{ ShopItems.sold eq false }.map {
+            ShopItems.selectAll().where{ (ShopItems.sold eq false) and (ShopItems.removed eq false)}.map {
                 SellingItem(it[ShopItems.seller], it[ShopItems.price], itemStackFromBase64Record(it[ShopItems.item]), it[ShopItems.id])
             }
         }
+    }
+
+    fun remove(itemId: Long, seller: UUID) : Boolean {
+        return transaction {
+            ShopItems.update({ ShopItems.id eq itemId }) {
+                it[ShopItems.removed] = true
+            }
+        } > 0
     }
 }

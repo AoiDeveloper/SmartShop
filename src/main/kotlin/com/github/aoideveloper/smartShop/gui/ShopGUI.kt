@@ -18,6 +18,9 @@ class ShopGUI(player: Player): Gui(player, "shop-gui", "ショップ", 3) {
         val buyItem = Icon(Material.EMERALD).setName("${ChatColor.GREEN}アイテムを買う").onClick {
             BuyGUI(player).open()
         }
+        val sellerItem = Icon(Material.ENDER_CHEST).setName("${ChatColor.LIGHT_PURPLE}出品者メニュー").onClick {
+            SellerGUI(player).open()
+        }
         val playerHead = ItemStack(Material.PLAYER_HEAD)
         val meta = playerHead.itemMeta as SkullMeta
         meta.owningPlayer = player
@@ -25,6 +28,7 @@ class ShopGUI(player: Player): Gui(player, "shop-gui", "ショップ", 3) {
         val profileIcon = Icon(playerHead).setName("現在の所持金:${SimpleEconomy.service.getBalance(player.uniqueId)}")
         addItem(10, sellItem)
         addItem(16, buyItem)
+        addItem(13, sellerItem)
         addItem(26, profileIcon)
     }
 }
